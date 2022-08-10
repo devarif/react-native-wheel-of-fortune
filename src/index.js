@@ -23,7 +23,7 @@ class WheelOfFortune extends Component {
       started: false,
       finished: false,
       winner: null,
-      gameScreen: new Animated.Value(width - 40),
+      gameScreen: new Animated.Value(width + (width / 3)),
       wheelOpacity: new Animated.Value(1),
       imageLeft: new Animated.Value(width / 2 - 30),
       imageTop: new Animated.Value(height / 2 - 70),
@@ -38,7 +38,7 @@ class WheelOfFortune extends Component {
     this.RewardCount = this.Rewards.length;
 
     this.numberOfSegments = this.RewardCount;
-    this.fontSize = 20;
+    this.fontSize = this.props.options.textSize;
     this.oneTurn = 360;
     this.angleBySegment = this.oneTurn / this.numberOfSegments;
     this.angleOffset = this.angleBySegment / 2;
@@ -58,7 +58,7 @@ class WheelOfFortune extends Component {
       started: false,
       finished: false,
       winner: null,
-      gameScreen: new Animated.Value(width - 40),
+      gameScreen: new Animated.Value(width + (width / 3)),
       wheelOpacity: new Animated.Value(1),
       imageLeft: new Animated.Value(width / 2 - 30),
       imageTop: new Animated.Value(height / 2 - 70),
@@ -164,7 +164,7 @@ class WheelOfFortune extends Component {
   _textRender = (x, y, number, i) => (
     <Text
       x={x - number.length * 5}
-      y={y - 80}
+      y={y - 40}
       fill={
         this.props.options.textColor ? this.props.options.textColor : '#fff'
       }
@@ -174,7 +174,13 @@ class WheelOfFortune extends Component {
         // Render reward text vertically
         if (this.props.options.textAngle === 'vertical') {
           return (
-            <TSpan x={x} dy={this.fontSize} key={`arc-${i}-slice-${j}`}>
+            <TSpan 
+              rotate={90}
+              x={x} 
+              dy={this.fontSize - 8} 
+              fontWeight="800"
+              fill={this.props.options.colors[i] === '#fff' ? "#EA1C23" : "#fff"}
+              key={`arc-${i}-slice-${j}`}>
               {number.charAt(j)}
             </TSpan>
           );
@@ -183,8 +189,10 @@ class WheelOfFortune extends Component {
         else {
           return (
             <TSpan
-              y={y - 40}
+              y={y - this.props.options.marginTopTextRewards}
               dx={this.fontSize * 0.07}
+              fontWeight="800"
+              fill={this.props.options.colors[i] === '#fff' ? "#EA1C23" : "#fff"}
               key={`arc-${i}-slice-${j}`}>
               {number.charAt(j)}
             </TSpan>
@@ -217,9 +225,9 @@ class WheelOfFortune extends Component {
             backgroundColor: this.props.options.backgroundColor
               ? this.props.options.backgroundColor
               : '#fff',
-            width: width - 20,
-            height: width - 20,
-            borderRadius: (width - 20) / 2,
+            width: width + (width / 3),
+            height: width + (width / 3),
+            borderRadius: (width + (width / 3)) / 2,
             borderWidth: this.props.options.borderWidth
               ? this.props.options.borderWidth
               : 2,
@@ -343,7 +351,7 @@ class WheelOfFortune extends Component {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Animated.View style={[styles.content, {padding: 10}]}>
+          <Animated.View style={[styles.content, {padding: 10}, this.props.style]}>
             {this._renderSvgWheel()}
           </Animated.View>
         </TouchableOpacity>
