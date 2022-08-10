@@ -42,9 +42,7 @@ class WheelOfFortune extends Component {
     this.oneTurn = 360;
     this.angleBySegment = this.oneTurn / this.numberOfSegments;
     this.angleOffset = this.angleBySegment / 2;
-    this.winner = this.props.options.winner
-      ? this.props.options.winner
-      : Math.floor(Math.random() * this.numberOfSegments);
+    this.winner = this.props.options.winner ?? Math.floor(Math.random() * this.numberOfSegments);
 
     this._wheelPaths = this.makeWheel();
     this._angle = new Animated.Value(0);
@@ -98,18 +96,7 @@ class WheelOfFortune extends Component {
     const arcs = d3Shape.pie()(data);
     var colors = this.props.options.colors
       ? this.props.options.colors
-      : [
-          '#E07026',
-          '#E8C22E',
-          '#ABC937',
-          '#4F991D',
-          '#22AFD3',
-          '#5858D0',
-          '#7B48C8',
-          '#D843B9',
-          '#E23B80',
-          '#D82B2B',
-        ];
+      : ['#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff', '#EA1C23', '#fff'];
     return arcs.map((arc, index) => {
       const instance = d3Shape
         .arc()
@@ -157,7 +144,11 @@ class WheelOfFortune extends Component {
         finished: true,
         winner: this._wheelPaths[winnerIndex].value,
       });
-      this.props.getWinner(this._wheelPaths[winnerIndex].value, winnerIndex);
+      if (this.props.getWinner) {
+        this.props.getWinner(this._wheelPaths[winnerIndex].value, winnerIndex);
+      } else {
+        this.props.options?.getWinner?.(this._wheelPaths[winnerIndex].value,winnerIndex);
+      }
     });
   };
 
@@ -346,7 +337,7 @@ class WheelOfFortune extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <View
           style={{
             position: 'absolute',
             width: width,
@@ -357,7 +348,7 @@ class WheelOfFortune extends Component {
           <Animated.View style={[styles.content, {padding: 10}, this.props.style]}>
             {this._renderSvgWheel()}
           </Animated.View>
-        </TouchableOpacity>
+        </View>
         {this.props.options.playButton ? this._renderTopToPlay() : null}
       </View>
     );

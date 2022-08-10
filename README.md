@@ -28,23 +28,23 @@ import WheelOfFortune from 'react-native-wheel-of-fortune'
 ```
 
 ## Properties
-Property | Type | Default | Desc
---- | --- | --- | ---
-rewards *(required)* | `Array` | - | Set Rewards 
-winner | `Number` | random | Set winner index
-colors | `Array` | Default Colors | Segment background colors
-duration *(ms)* | `Number` | 10000 | Completion time  (ms)
-getWinner *(required)* | `callback(value,index)` | - | Winner value and index callback function
-backgroundColor | `String` | #FFFFFF | Wheel background color
-borderWidth | `Number` | 2 | Wheel border width
-borderColor | `String` | #FFFFFF | Wheel border color
-textColor | `String` | #FFFFFF | Rewards text color
-knobSize | `Number` | 20 | Knoob size
-knoobSource | `Path` | knoob.png | Knoob source
-playButton | `render()` | example | Render method for tap to play button
-innerRadius | `Number` | 100 | Set inner radius size
-innerRadius | `Number` | 100 | Set inner radius size
-textAngle | `String` | horizontal | Set angle of reward text
+| Property               | Type                     | Default         | Desc                                     |
+| ---------------------- | ------------------------ | --------------- | ---------------------------------------- |
+| rewards _(required)_   | `Array`                  | -               | Set Rewards                              |
+| winner                 | `Number`                 | random          |  Set winner index                        |
+| colors                 | `Array`                  |  Default Colors | Segment background colors                |
+| duration _(ms)_        | `Number`                 | 10000           | Completion time (ms)                     |
+| getWinner _(required)_ |  `callback(value,index)` |  -              | Winner value and index callback function |
+| backgroundColor        | `String`                 | #FFFFFF         |  Wheel background color                  |
+| borderWidth            | `Number`                 | 2               | Wheel border width                       |
+| borderColor            |  `String`                |  #FFFFFF        | Wheel border color                       |
+| textColor              | `String`                 |  #FFFFFF        | Rewards text color                       |
+| knobSize               | `Number`                 | 20              | Knob size                                |
+| knobSource             | `Path`                   | knob.png        |  Knob source                             |
+| playButton             |  `render()`              | example         | Render method for tap to play button     |
+| innerRadius            | `Number`                 | 100             | Set inner radius size                    |
+| innerRadius            | `Number`                 | 100             | Set inner radius size                    |
+| textAngle              | `String`                 | horizontal      | Set angle of reward text                 |
 
 ## Usage
 ```js
