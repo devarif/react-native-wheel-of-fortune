@@ -289,10 +289,13 @@ class WheelOfFortune extends Component {
     return (
       <Animated.View
         style={{
+          position: 'absolute',
+          top: -(knobSize * 2.2),
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
           width: knobSize,
           height: knobSize * 2,
-          justifyContent: 'flex-end',
-          zIndex: 1,
+          zIndex: 9999,
           opacity: this.state.wheelOpacity,
           transform: [
             {
